@@ -40,3 +40,8 @@ AND duration >=
 (SELECT MAX(duration) 
 FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info"
 WHERE type = 'Movie' AND release_year = '2009');  
+
+#8. Create list of directors and their casts for only movies in the database without using a JOIN command 
+SELECT people.show_id, people.director, people.cast
+FROM "CharlotteChaze/BreakIntoTech"."netflix_people" AS people
+WHERE show_id IN (SELECT show_id FROM "CharlotteChaze/BreakIntoTech"."netflix_titles_info" WHERE type = 'Movie')
