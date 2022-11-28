@@ -10,10 +10,13 @@ INSERT INTO store VALUES (5, "standard dachshund", "red", 2, 9, 120);
 INSERT INTO store VALUES (6, "standard dachshund", "black and white", 1, 7, 120);
 
 --display the database ordered by price 
-SELECT * FROM store ORDER BY price DESC;
+SELECT * 
+FROM store 
+ORDER BY price DESC;
 
 --what is the average price of a Dachshund?
-SELECT Round (AVG(price)) AS "Average Price" FROM STORE;
+SELECT Round (AVG(price)) AS "Average Price" 
+FROM STORE;
 
 --what is the average price of a Miniature Dachshund?
 SELECT Round (AVG(price)) AS "Average Price for Miniature Dachshund" FROM STORE WHERE dog = "miniature dachshund";
@@ -26,3 +29,23 @@ SELECT Min(price) AS "Min Price" FROM STORE;
 
 --what are the 5 most popular Dachshunds? 
 SELECT popularity FROM store ORDER BY popularity DESC LIMIT 5;
+
+-- Adding another column "temperament"
+ALTER TABLE store ADD temperament TEXT;
+
+-- Filling in the NULL values with data
+UPDATE store SET temperament = "Assertive" where id = 1;
+UPDATE store SET temperament = "Neutral" where id = 2;
+UPDATE store SET temperament = "Assertive" where id = 3;
+UPDATE store SET temperament = "Assertive" where id = 4;
+UPDATE store SET temperament = "Neutral" where id = 5;
+UPDATE store SET temperament = "Passive" where id = 6;
+
+-- Inserting a new row of data that includes the new column
+INSERT INTO store (id, dog, color, quantity, popularity, price, temperament) 
+    VALUES (7, "kaninchen", "red", 1, 10, 210, "Assertive");
+    
+-- Which dogs are priced higher than average within the store?
+SELECT * 
+FROM store WHERE price > (SELECT AVG(price) FROM store) 
+ORDER BY price DESC
