@@ -37,3 +37,11 @@ SELECT artist_name, track_name, popularity
 FROM BIT_DB.Spotifydata
 ORDER BY popularity DESC
 LIMIT 10
+
+#Determined which artists have appeared more than once and which ones appeared on the list the most
+SELECT artist_name, COUNT(artist_name) AS number_times_listed
+FROM BIT_DB.spotifydata
+GROUP BY artist_name
+ORDER BY number_times_listed DESC
+
+
