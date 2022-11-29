@@ -44,4 +44,14 @@ FROM BIT_DB.spotifydata
 GROUP BY artist_name
 ORDER BY number_times_listed DESC
 
+#Determined which artists have the longest songs on the list and listed duration in seconds
+SELECT artist_name, track_name, (duration_ms/1000) AS Seconds
+FROM BIT_DB.spotifydata
+ORDER BY Seconds DESC
+
+#Determined which artists have the most song time on the list
+SELECT artist_name, SUM((duration_ms/1000)) AS Total_Seconds_On_List
+FROM BIT_DB.spotifydata
+GROUP BY artist_name
+ORDER BY Total_Seconds_On_List DESC
 
